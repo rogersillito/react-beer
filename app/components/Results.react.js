@@ -1,9 +1,20 @@
 import React from 'react';
+import Beer from './Beer.react.js';
 
 const Results = React.createClass({
+    getBeers() {
+        return this.props.beers.map((details, i) =>
+            <Beer details={details} key={i}/>
+        );
+    },
     render() {
          return (
-            <div className="results">Results go here</div>
+             <div className="results">
+                 <div className="beers">
+                     {this.getBeers()}
+                     {/* {this.props.beers.map((details, i) => <Beer details={details} key={i}/>)} */}
+                 </div>
+             </div>
          );
     }
 });
