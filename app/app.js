@@ -6,10 +6,6 @@ import css from './css/style.styl';
 import Main from './components/Main.react.js';
 import Results from './components/Results.react.js';
 import Single from './components/Single.react.js';
-/* import Loader from './Loader.react.js';
-   import Search from './Search.react.js';
-   import Beer from './Beer.react.js';
- */
 
 render((
   <Router history={browserHistory}>
