@@ -40,6 +40,7 @@ const Main = React.createClass({
             });
     },
     componentWillMount() {
+        // check this.props.params to catch direct url access
         this.loadBeers();
     },
     componentWillReceiveProps(nextProps) {
@@ -48,7 +49,7 @@ const Main = React.createClass({
     render() {
         return (
             <div className="wrapper">
-                <Header siteName="Give me beer" subTitle="because it's beer time"/>
+                <Header siteName="Give me beer" subTitle="..it's beer time"/>
                 <Search />
                 <button onClick={this.incrementBeers}>Beer Count = {this.state.numBeers}</button>
                 {/* ... is spread operator (ES8?) - perform an object copy */}
