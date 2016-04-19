@@ -12,7 +12,6 @@ const Results = React.createClass({
              <div className="results">
                  <div className="beers">
                      {this.getBeers()}
-                     {/* {this.props.beers.map((details, i) => <Beer details={details} key={i}/>)} */}
                  </div>
              </div>
          );

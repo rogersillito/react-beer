@@ -13,17 +13,28 @@ const Main = React.createClass({
         const beerAmount = this.state.numBeers + 1;
         this.setState({numBeers: beerAmount});
     },
-    loadBeers(searchTerm = 'mild') {
+    loadBeers(searchTerm = 'lager') {
         console.log('searching for: ', searchTerm);
+        const storageKey = `search-${searchTerm}`;
+
+        const localStorageBeers = localStorage.getItem(storageKey);
+        if (localStorageBeers) {
+            const storedBeers = JSON.parse(localStorageBeers);
+            this.setState({beers: storedBeers});
+            return; // avoid fetching anything now we have cached results
+        }
+
         fetch(`http://api.react.beer/v2/search?q=${searchTerm}&type=beer`)
-                         .then(data => data.json())
-                         .then((beers) => {
-                             // !! - if property exists, return true
-                             // implicit return on lambdas (when no { })
-                             // also they don't rebind this - so it still refers to parent scope!
-                             const filteredBeers = beers.data.filter(beer => !!beer.labels);
-                             this.setState({beers: filteredBeers});
-                         });
+            .then(data => data.json())
+            .then((beers) => {
+                // !! - if property exists, return true
+                // implicit return on lambdas (when no { })
+                // also they don't rebind this - so it still refers to parent scope!
+                const filteredBeers = beers.data.filter(beer => !!beer.labels);
+                this.setState({beers: filteredBeers});
+                /* console.log('using cache'); */
+                localStorage.setItem(storageKey, JSON.stringify(filteredBeers));
+            });
     },
     componentWillMount() {
         this.loadBeers();
